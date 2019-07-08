@@ -17,6 +17,9 @@ COPY hca.tar /opt
 RUN mkdir /opt/hydroclass && \
     tar -xf /opt/hca.tar -C /opt/hydroclass && \
     rm -rf /opt/hca.tar
+COPY Radx2Grid /opt/hydroclass
+COPY RadxConvert /opt/hydroclass
+COPY hc_composite /opt/hydroclass
 ENV PATH=/opt/hydroclass:$PATH
 
 #install necessary libraries for hydroclass 
@@ -24,4 +27,5 @@ COPY hc_lib.tar /opt
 RUN tar -xf /opt/hc_lib.tar && \
     rm -rf /opt/hc_lib.tar
 ENV LD_LIBRARY_PATH=/opt/hc_lib:$LD_LIBRARY_PATH
+
 
