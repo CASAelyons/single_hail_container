@@ -24,7 +24,8 @@ ENV PATH=/opt/hydroclass:$PATH
 
 #install necessary libraries for hydroclass 
 COPY hc_lib.tar /opt
-RUN tar -xf /opt/hc_lib.tar && \
+RUN mkdir /opt/hc_lib && \
+    tar -xf /opt/hc_lib.tar -C /opt/hc_lib && \
     rm -rf /opt/hc_lib.tar
 ENV LD_LIBRARY_PATH=/opt/hc_lib:$LD_LIBRARY_PATH
 
