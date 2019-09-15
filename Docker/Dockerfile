@@ -6,8 +6,8 @@ from centos:centos7
 # install basic build environment
 RUN yum -y install epel-release && yum -y update && \
     yum -y install gcc gcc-c++ gcc-gfortran zlib-devel libxml2-devel && \
-    yum -y install libcurl-devel make netcdf-devel libpng-devel && \
-    yum -y install python libconfig-devel bc udunits2-devel && \
+    yum -y install libcurl-devel make netcdf-devel libnetcdf-cxx-legacy-dev libpng-devel && \
+    yum -y install python bc udunits2-devel && \
     yum -y install gsl-devel lapack-devel hdf5-devel compat-libf2c-34 && \
     rm -rf /var/lib/apt/lists/*
 
@@ -47,23 +47,11 @@ RUN mkdir /opt/libconfig && \
     rm -rf /opt/libconfig && \
     rm /opt/libconfig-1.5.tar.gz
 ENV LD_LIBRARY_PATH=/usr/local/libconfig/lib:$LD_LIBRARY_PATH
-
-# install jansson in /opt/jansson
-COPY jansson-2.7.tar.gz /opt
-RUN mkdir /opt/jansson && \
-    tar xzf /opt/jansson-2.7.tar.gz -C /opt/jansson && \
-    cd /opt/jansson/jansson-2.7 && \
-    ./configure --prefix=/usr/local/jansson && \
-    make && make install && \
-    cd /opt && \
-    rm -rf /opt/jansson && \
-    rm /opt/jansson-2.7.tar.gz
-ENV LD_LIBRARY_PATH=/usr/local/jansson/lib:$LD_LIBRARY_PATH
 			    
-#install hmt
-COPY hmt.tar /opt
-RUN tar xf /opt/hmt.tar -C /opt && \
-    cd /opt/hmt && make && \
-    cd /opt && rm /opt/hmt.tar
-ENV PATH=/opt/hmt:$PATH
+#install d3_hmt
+COPY d3_hmt.tar /opt
+RUN tar xf /opt/d3_hmt.tar -C /opt && \
+    cd /opt/d3_hmt && make && \
+    cd /opt && rm /opt/d3_hmt.tar
+ENV PATH=/opt/d3_hmt:$PATH
 
