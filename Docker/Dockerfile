@@ -6,7 +6,7 @@ from centos:centos7
 # install basic build environment
 RUN yum -y install epel-release && yum -y update && \
     yum -y install gcc gcc-c++ gcc-gfortran zlib-devel libxml2-devel && \
-    yum -y install libcurl-devel make netcdf-devel libnetcdf-cxx-legacy-dev libpng-devel && \
+    yum -y install libcurl-devel make netcdf-devel netcdf-cxx-devel libpng-devel && \
     yum -y install python bc udunits2-devel && \
     yum -y install gsl-devel lapack-devel hdf5-devel compat-libf2c-34 && \
     rm -rf /var/lib/apt/lists/*
